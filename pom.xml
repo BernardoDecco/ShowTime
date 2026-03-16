@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.horadoshow</groupId>
-  <artifactId>investment-robot</artifactId>
+  <groupId>com.showtime</groupId>
+  <artifactId>showtime</artifactId>
   <version>0.1.0-SNAPSHOT</version>
-  <name>investment-robot</name>
-  <description>Swing-trade investment robot (market data + strategies + broker adapters)</description>
+  <name>ShowTime</name>
+  <description>ShowTime - multi-timeframe trading research and backtesting framework</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -87,10 +87,44 @@
               <createDependencyReducedPom>false</createDependencyReducedPom>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com.horadoshow.robot.app.RobotMain</mainClass>
+                  <mainClass>com.showtime.robot.app.RobotMain</mainClass>
                 </transformer>
               </transformers>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Code formatting with Google Java Format via Spotless -->
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.43.0</version>
+        <configuration>
+          <java>
+            <googleJavaFormat/>
+          </java>
+        </configuration>
+      </plugin>
+
+      <!-- Style checks using Checkstyle (Google style defaults) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.4.0</version>
+        <configuration>
+          <configLocation>google_checks.xml</configLocation>
+          <encoding>UTF-8</encoding>
+          <consoleOutput>true</consoleOutput>
+          <failsOnError>true</failsOnError>
+          <linkXRef>false</linkXRef>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>

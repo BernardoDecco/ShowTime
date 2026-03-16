@@ -5,7 +5,7 @@ Java-based trading research and automation project focused on Brazilian stocks (
 ### Overview
 
 - **Market data**: `BrapiMarketDataClient` fetches daily candles from `brapi.dev`, returning a unified `Candle` domain object.
-- **Trading core** (package `com.horadoshow.robot.trading`):
+- **Trading core** (package `com.showtime.robot.trading`):
   - `Strategy` interface receives a `MultiTimeframeSnapshot` (daily/weekly/monthly candles) and a `StrategyContext` (cash and open position) and returns a `StrategyDecision` (buy/sell/hold, position size, optional stop loss / take profit).
   - `BacktestEngine` runs a `Strategy` over historical candles using a `SimulatedBroker`, producing a `BacktestResult` with equity and performance metrics.
 - **Execution**:
@@ -14,21 +14,21 @@ Java-based trading research and automation project focused on Brazilian stocks (
 
 ### Project structure (key packages)
 
-- `com.horadoshow.robot.domain`
+- `com.showtime.robot.domain`
   - `Candle` – immutable OHLCV candle used across the project.
-- `com.horadoshow.robot.marketdata`
+- `com.showtime.robot.marketdata`
   - `MarketDataClient` – abstraction for historical candles.
   - `BrapiMarketDataClient` – implementation using `brapi.dev`.
-- `com.horadoshow.robot.trading`
+- `com.showtime.robot.trading`
   - `Strategy`, `StrategyDecision`, `StrategyContext`
   - `MultiTimeframeSnapshot`, `Timeframe`
-- `com.horadoshow.robot.trading.broker`
+- `com.showtime.robot.trading.broker`
   - `SimulatedBroker`, `Broker`, `AccountState`, `Position`
-- `com.horadoshow.robot.trading.backtest`
+- `com.showtime.robot.trading.backtest`
   - `BacktestEngine`, `BacktestResult`
-- `com.horadoshow.robot.trading.strategies`
+- `com.showtime.robot.trading.strategies`
   - `DailySmaCrossStrategy` – example daily SMA crossover strategy.
-- `com.horadoshow.robot.trading.app`
+- `com.showtime.robot.trading.app`
   - `BacktestRunner` – command line entrypoint to run backtests.
 
 ### Running a backtest
@@ -47,7 +47,7 @@ mvn clean package
 Then run the backtest (example with PETR4 over the last 2 years):
 
 ```bash
-java -cp target/ShowTime-*.jar com.horadoshow.robot.trading.app.BacktestRunner PETR4 2y
+java -cp target/ShowTime-*.jar com.showtime.robot.trading.app.BacktestRunner PETR4 2y
 ```
 
 CLI arguments:
